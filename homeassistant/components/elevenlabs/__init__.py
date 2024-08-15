@@ -41,7 +41,7 @@ type EleventLabsConfigEntry = ConfigEntry[ElevenLabsData]
 async def async_setup_entry(hass: HomeAssistant, entry: EleventLabsConfigEntry) -> bool:
     """Set up ElevenLabs text-to-speech from a config entry."""
     entry.add_update_listener(update_listener)
-    client = AsyncElevenLabs(api_key=entry.data[CONF_API_KEY])
+    client = AsyncElevenLabs(api_key=entry.data[CONF_API_KEY], timeout=None)
     model_id = entry.options[CONF_MODEL]
     try:
         model = await get_model_by_id(client, model_id)
